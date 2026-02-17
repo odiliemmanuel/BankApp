@@ -4,12 +4,12 @@ public class Account {
 
     private String name;
     private String age;
-    private int phoneNumber;
-    private int accountNumber;
+    private String phoneNumber;
+    private String accountNumber;
     private int balance;
     private final int pin;
 
-    Account(String name, String age, int phoneNumber, int accountNumber, int pin){
+    Account(String name, String age, String phoneNumber, String accountNumber, int pin){
         validateName(name);
         this.name = name;
 
@@ -23,6 +23,7 @@ public class Account {
         validateAccountNumberLength(accountNumber);
         this.accountNumber = accountNumber;
 
+        validatePinLength(pin);
         this.pin = pin;
     }
 
@@ -78,12 +79,12 @@ public class Account {
 
 
 
-    public int getAccountNumber() {
-        int result = (int)(phoneNumber);
+    public String getAccountNumber() {
+        String result = phoneNumber.substring(1);
         return result;
     }
 
-    public void setAccountNumber(int accountNumber) {
+    public void setAccountNumber(String accountNumber) {
         validateAccountNumberLength(accountNumber);
             this.accountNumber = accountNumber;
 
@@ -92,12 +93,12 @@ public class Account {
 
 
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void changePhoneNumber(int phoneNumber) {
-        validatePhoneNumberLength(phoneNumber);
+    public void changePhoneNumber(String phoneNumber) {
+        if(validatePhoneNumberLength(phoneNumber));
         this.phoneNumber = phoneNumber;
     }
 
@@ -106,7 +107,7 @@ public class Account {
 
     private void validatePinLength(int pin){
         String value = Integer.toString(pin);
-        if(value.length() != 4 && !value.matches("[0-9]")){
+        if(value.length() != 4 && !value.matches("[0-9]+")){
             throw new IllegalArgumentException("Invalid PIN");
         }
     }
@@ -121,25 +122,29 @@ public class Account {
 
 
 
-    private void validatePhoneNumberLength(int phoneNumber){
-        String value = Integer.toString(phoneNumber);
-        if(value.length() != 11 && !value.matches("[0-9]")){
+    private boolean validatePhoneNumberLength(String phoneNumber){
+
+        if(phoneNumber.length() != 11 && !phoneNumber.matches("^[0-9]+$")){
             throw new IllegalArgumentException("Invalid PIN");
+        }
+        else {
+            return true;
         }
     }
 
 
 
 
-    private void validateAccountNumberLength(int accountNumber){
-        String value = Integer.toString(accountNumber);
-        if(value.length() != 10 && !value.matches("[0-9]")){
+    private void validateAccountNumberLength(String accountNumber){
+
+        if(accountNumber.length() != 10 && !accountNumber.matches("[0-9]+")){
             throw new IllegalArgumentException("Invalid PIN");
         }
     }
 
-    private void validateAccountNumber(int accountNumber){
-        if(this.accountNumber != accountNumber){
+
+    private void validateAccountNumber(String accountNumber){
+        if(!this.accountNumber.equals(accountNumber)){
             throw new IllegalArgumentException("Invalid PIN");
         }
     }
@@ -148,7 +153,7 @@ public class Account {
 
 
     private void validateName(String name){
-        if(!name.matches("[A-Za-z\\s]")){
+        if(!name.matches("[A-Za-z\\s]+")){
             throw new IllegalArgumentException("Invalid Name");
         }
     }
@@ -164,7 +169,7 @@ public class Account {
 
     private void validateAgeValue(String age){
 
-        if(!age.matches("[0-9]")){
+        if(!age.matches("[0-9]+")){
             throw new IllegalArgumentException("Invalid Age");
         }
     }
