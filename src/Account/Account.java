@@ -44,7 +44,7 @@ public class Account {
         validatePin(pin);
         validatePinLength(pin);
         if(amount >= 500 && amount <= balance){
-            balance -= balance;
+            balance -= amount;
         }
 
     }
@@ -98,7 +98,7 @@ public class Account {
     }
 
     public void changePhoneNumber(String phoneNumber) {
-        if(validatePhoneNumberLength(phoneNumber));
+        validatePhoneNumberLength(phoneNumber);
         this.phoneNumber = phoneNumber;
     }
 
@@ -113,7 +113,6 @@ public class Account {
     }
 
     private void validatePin(int pin){
-//        validatePinLength(pin);
         if(this.pin != pin){
             throw new IllegalArgumentException("Invalid PIN");
         }
@@ -122,14 +121,12 @@ public class Account {
 
 
 
-    private boolean validatePhoneNumberLength(String phoneNumber){
+    private void validatePhoneNumberLength(String phoneNumber){
 
         if(phoneNumber.length() != 11 && !phoneNumber.matches("^[0-9]+$")){
             throw new IllegalArgumentException("Invalid PIN");
         }
-        else {
-            return true;
-        }
+
     }
 
 
