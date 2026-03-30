@@ -9,9 +9,9 @@ public class Account {
     private int balance;
     private final int pin;
 
-    Account(String name, String age, String phoneNumber, String accountNumber, int pin){
-        validateName(name);
-        this.name = name;
+    Account(String nameOfPerson, String age, String phoneNumber, String accountNumber, int pin){
+        validateName(nameOfPerson);
+        name = name;
 
         validateAge(age);
         validateAgeValue(age);
